@@ -1,0 +1,73 @@
+.produtos {
+    border-top: 2px solid #2c70ff;
+    border-bottom: 2px solid #2c70ff;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 0;
+    padding-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #title-produtos{
+    font-size: 25px;
+    color:brown;
+    margin-left: 25%;
+    
+  }
+  .tprodutos{
+   margin-top: 50px;
+   margin-left: 230px;
+  }
+  .edit-produto{
+    margin-top: 50px;
+    margin-left: 230px;
+   }
+   #btnEditar{
+    margin-left: 30%;
+    margin-top: 40px;
+    background: blue;
+    color:bisque;
+    width: 100px;
+    height: 40px;
+  
+   }
+   #btnEditar:hover{
+    background-color: aquamarine;
+    color:black;
+   }
+  
+  .excl-produto{
+    margin-top: 100px;
+    margin-left: 30%;
+   }
+   fieldset{
+    width: 400px;
+   } 
+   
+   #btnExcluir{
+    margin-left: 30%;
+    margin-top: 40px;
+    background: blue;
+    color:bisque;
+    width: 80px;
+    height: 40px;
+  
+   }
+   #btnExcluir:hover{
+    background-color: red;
+    color:white;
+   }
+  
+  
+   #btnCancelar{
+    margin-top: 40px;
+    background: blue;
+    color:bisque;
+    width: 80px;
+    height: 40px;
+  
+   }
+   #btnCancelar:hover{
+    background-color: aquamarine;
+    color:black;
+   }
