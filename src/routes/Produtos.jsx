@@ -1,62 +1,85 @@
-import { Link } from "react-router-dom";
 import { ListaProdutos } from "../components/ListaProdutos";
-import {AiFillEdit as EditObj} from "react-icons/ai";
-import {RiDeleteBin2Fill as DelObj} from "react-icons/ri";
-import styles from '../css/estilo.module.css'
-
+import { Link } from "react-router-dom";
+import {AiFillEdit as Editar, AiOutlineDelete as Excluir} from "react-icons/ai";
+import classes from "./Produtos.module.css";
+import { useEffect, useState } from "react";
 
 export default function Produtos() {
 
-  const estiloTabela = {
-    borderCollapse: "collapse",
-    border: "2px solid #ccc",
-    width: "100%",
-    margin: "auto",
-    
-  }
+    document.title = "Lista de Produtos";
 
-  const estiloCelula = {
-    border: "1px solid #ccc",
-    textAlign: "left",
-    padding: "8px"
-  }
+    const [listaProdutoLocal, setListaProdutoLocal] = useState([{}])
 
-    
-  return (
-      <section className={styles.inicioProduto}>
-          <h1>Produtos Informáticos - FIAPO</h1>
+    useEffect(()=>{
 
-          <table style={estiloTabela}>
-              <thead>
-                <tr>
-                  <th style={estiloCelula}>ID</th>
-                  <th style={estiloCelula}>NOME</th>
-                  <th style={estiloCelula}>DESCRIÇÃO</th>
-                  <th style={estiloCelula}>PREÇO</th>
-                  <th style={estiloCelula}>Editar/Excluir</th>
+        fetch('http://localhost:5000/produtos',{
+
+          method: 'GET',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+        }).then((response)=> response.json())
+        .then((data)=>{
+            setListaProdutoLocal(data);
+        })
+        .catch((err)=>console.log(err));
+      
+    },[]);
+
+    return (
+      <div>
+          <h1>LISTA DE PRODUTOS</h1>
+
+
+        <div>
+          <table className={classes.tableStyle}>
+            <thead>
+              <tr className={classes.tableHeaderStyle}>
+                <th className={classes.tableHeaderStyle}>ID</th>
+                <th className={classes.tableHeaderStyle}>Nome</th>
+                <th className={classes.tableHeaderStyle}>Descrição</th>
+                <th className={classes.tableHeaderStyle}>Preço</th>
+                <th className={classes.tableHeaderStyle}>Imagem</th>
+                <th className={classes.tableHeaderStyle}>Editar/Excluir</th>
                 </tr>
-              </thead>
-
-              <tbody>
-                {ListaProdutos.map((produto,indice)=>(
-                    <tr key={indice}>
-                      <td style={estiloCelula}>{produto.id}</td>
-                      <td style={estiloCelula}>{produto.nome}</td>
-                      <td style={estiloCelula}>{produto.desc}</td>
-                      <td style={estiloCelula}>{produto.preco}</td>
-                      <td style={{textAlign:"center",border:"1px solid #ccc"}}><Link to={`/editar/produtos/${produto.id}`}><EditObj/></Link> | <Link to={`/excluir/produtos/${produto.id}`}><DelObj/></Link></td>
-                    </tr>
-                ))}
-              </tbody>
-
-              <tfoot>
-                <tr>
-                  <td colSpan={5} style={{textAlign:"center"}}>PRODUTOS</td>
+            </thead>
+            <tbody>
+              {listaProdutoLocal.map((produto, index) => (
+                <tr key={index} className={classes.tableLineStyle}>
+                  <td className={classes.tableDataStyle}>{produto.id}</td>
+                  <td className={classes.tableDataStyle}>{produto.nome}</td>
+                  <td className={classes.tableDataStyle}>{produto.desc}</td>
+                  <td className={classes.tableDataStyle}>{produto.preco}</td>
+                  <td className={classes.tableDataStyle}><img src={produto.img} alt={produto.desc} /></td>
+                  <td className={classes.tableDataStyle}><Link to={`/editar/produtos/${produto.id}`}><Editar/></Link> | <Link to={`/excluir/produtos/${produto.id}`}><Excluir/></Link></td>
                 </tr>
-              </tfoot>
+              ))} 
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan="5" className={classes.tableDataStyle}>Total de Produtos: {ListaProdutos.length}</td>
+              </tr>
+            </tfoot>
           </table>
+        </div>
 
-      </section>
+      </div>
     )
   }
+
   
+//   <div>
+//   <button onClick={()=> setCount(count + 1)}>COUNTER - {count}</button>
+// </div>
+
+  
+  // const [exemplo, setExemplo] = useState([{}]);
+  // const [count, setCount] = useState(0);
+
+  // useEffect(()=>{
+  //   console.log("Use-Effect que será sempre renderizado!");
+  // });
+  
+  // useEffect(()=>{
+  //   console.log("Use-Effect que será renderizado o objeto ou componente ou elemento que está no array de depenências sofrer atualização.");
+  // },[count]);
