@@ -1,7 +1,13 @@
-export default function Home(){
-    return(
-        <main>
-            <h1>HOME</h1>
-        </main>
+
+export default function Home() {
+
+    document.title = "Home";
+  
+    return (
+      <div>
+          <h1>COMPONENTE - HOME</h1>
+          <img src="/produtos.jpg" alt="Produtos" />
+      </div>
     )
-}
+  }
+  
