@@ -1,17 +1,16 @@
-import Cabecalho from "./components/Cabecalho";
+import { Outlet} from "react-router-dom";
+import Cabecalho from "./components/Cabecalho/Cabecalho";
 import Rodape from "./components/Rodape";
-import { Outlet } from "react-router-dom";
 
 export default function App() {
-  //Área declarativa
-  let viteLogoAlt = "Vite Logo";
+  
+
+
   return (
     <>
-      {/* Área imperativa */}
-
-      <Cabecalho />
+      <Cabecalho/>
         <Outlet/>
-      <Rodape />
+      <Rodape/>
     </>
-  );
+  )
 }
